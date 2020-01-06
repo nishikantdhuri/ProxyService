@@ -2,12 +2,13 @@ from flask import Flask,request,Response,Blueprint,redirect,url_for
 import time
 from flask_login import current_user,login_required,fresh_login_required
 import requests
+import os
 from app import login_manager
-SITE_NAME1 = 'http://127.0.0.1:81'
-SITE_NAME2 = 'http://127.0.0.1:82'
+SITE_NAME1 = os.environ['SITE1']#'http://127.0.0.1:81'
+SITE_NAME2 = os.environ['SITE2'] #'http://127.0.0.1:82'
 curr_req=''
 count=0
-map_port={'81':'http://127.0.0.1:81','82':'http://127.0.0.1:82'}
+map_port={'81':SITE_NAME1,'82':SITE_NAME2}
 states={'81':['CLOSED',0,0],'82':['CLOSED',0,0]}
 general_bp=Blueprint('general_bp',__name__,url_prefix='/home')
 

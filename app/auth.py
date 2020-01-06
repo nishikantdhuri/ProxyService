@@ -31,7 +31,7 @@ def unauthorized():
 
 @login_manager.user_loader
 def load_user(user_id):
-    if user_id is not None and 1<0:
+    if user_id is not None :
         return User.query.get(user_id)
     return None
 
@@ -50,13 +50,22 @@ def login_page():
             user = User.query.filter_by(email=email).first()
             if user:
                 if user.check_password(password=password):
-                    login_user(user,remember=True)
+                    login_user(user)
                     next = request.args.get('next')
                     return redirect(next or url_for('main_bp.dashboard'))
         flash('Invalid username/password combination')
         return redirect(url_for('auth_bp.login_page'))
 
     return render_template('login.html',form=LoginForm(),title='Login',body='Login')
+
+@auth_bp.route('/testdata',methods=['GET','POST'])
+def testdata():
+    f=open('E:\jsondata.json')
+    a=f.read()
+    c= bytes(a,encoding='utf-8')
+    import zlib
+    b=zlib.compress(c)
+    return b
 
 @auth_bp.route('/sign_up',methods=['GET','POST'])
 def signup_page():
