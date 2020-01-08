@@ -10,7 +10,7 @@
 
     {% if current_user.is_authenticated %}
     <p>Hi {{ current_user.name }}!</p>
-    <a href="http://127.0.0.1:5000/home/regionb/getmli">MLI-ISA</a>
+    <a href="http://172.17.0.1/trade/gettrades">MLI-OSA</a>
     <a href="{{url_for('auth_bp.logout_page')}}">Logout</a>
   {% endif %}
 {% endblock %}
